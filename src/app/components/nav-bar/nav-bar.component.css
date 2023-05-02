@@ -1,0 +1,54 @@
+
+
+/*** Header *******************************************************************/
+
+.navbar{
+  position: sticky;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(56, 56, 56);
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 5;
+  padding: 0px 0px 0px 20px; /* top rigth bot left */
+  top: 0;
+  font-size: 20px;
+}
+
+.social{
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.c{
+  all: unset;
+  cursor: pointer;
+  background-size: cover; 
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+}
+
+.github-b{
+  background-image: url('../../../assets/github.png');
+}
+
+.linkedin-b{
+  background-image: url('../../../assets/linkedin.png');
+}
+
+#login{
+  color: green;
+  width: 100px;
+  border: 1px solid green;
+  text-align: center;
+}
+
+#login:hover{
+  background-color: green;
+  color: white;
+}
