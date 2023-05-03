@@ -1,7 +1,14 @@
-.editable-card{
-  display: grid;
-  grid-template-columns: 50% 50%;
+.section{
+  display: flex;
+  flex-direction: column;
   font-size: 20px;
+}
+
+.title{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .icon{
@@ -10,22 +17,12 @@
   margin: 0px 20px;
 }
 
-.info-card{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.grid-item-l{
-  justify-self: end;
-  align-self: center;
-}
-
 .b{
   all: unset;
   cursor: pointer;
   background-size: cover; 
   background-position: center;
+  margin: 10px;
   width: 25px;
   height: 25px;
 }
@@ -45,4 +42,12 @@
 .b:hover{
   width: 30px;
   height: 30px;
+}
+
+.subsection{
+  width: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

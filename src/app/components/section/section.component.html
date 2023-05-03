@@ -1,0 +1,21 @@
+<div class="section">
+  <div class="title">
+    <h2>{{section.title}}</h2>
+    <button class="more-b b"></button>
+  </div>
+  <p class="title" *ngIf="section.subtitle">{{section.subtitle}}<button class="edit-b b"></button></p>
+  <div class="subsection" *ngFor="let subsection of section.subsections">
+    <div class="title">
+      <span *ngIf="subsection.img"><img alt="" class="icon" [src]="subsection.img"></span>
+      <div>
+        <h3>{{subsection.title}}</h3>
+        <p>{{subsection.subtitle}}</p>
+        <span *ngIf="subsection.graph">{{subsection.graph}}</span>
+      </div>
+    </div>
+    <div class="title">
+      <button class="edit-b b"></button>
+      <button class="delete-b b"></button>
+    </div>
+  </div>
+</div>
