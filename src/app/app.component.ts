@@ -1,36 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { PortfolioService } from './services/portfolio.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent{
   title = 'PortfolioFE';
-
-  sectionsInfo = [
-  {
-    "title": "",
-    "subtitle": "",
-    "paragraph": "",
-    "img": "",
-    "subsections": [
-      {
-        "title": "",
-        "subtitle": "",
-        "img": "",
-        "graph": "",
-      }
-    ]
-  }];
-  
-  constructor(private portfolioData: PortfolioService){}
-
-  ngOnInit(){
-    this.portfolioData.getData().subscribe(data => {
-      this.sectionsInfo = data;
-      console.log(data);
-    });
-  }
+  constructor(){}
 }
