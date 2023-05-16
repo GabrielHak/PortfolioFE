@@ -3,6 +3,8 @@
   <div class="social">
     <button class="github-b c"></button>
     <button class="linkedin-b c"></button>
-    <button class="c" id="login">Login</button>
+    <form [formGroup]="form" class="form" action="" (ngSubmit)="onLogout()">
+      <button class="c button" id="login" type="submit">Logout</button>
+    </form>
   </div>
 </div>

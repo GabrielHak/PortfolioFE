@@ -1,32 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
+import { Auth, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+// import { signOut } from 'firebase/auth';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  url = 'http://npinti.ddns.net:9008/api/auth/login';
-  currentUserSubject: BehaviorSubject<any>;
 
-  constructor(private http:HttpClient) { 
-    console.log("Ejecutando servicio");
-    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser') || '{}'));
+  constructor(private auth: Auth) { 
   }
 
-  // isLoggedIn() {
-  //   const token = localStorage.getItem('token'); // get token from local storage
-  //   const payload = atob(token.split('.')[1]); // decode payload of token
-  //   const parsedPayload = JSON.parse(payload); // convert payload into an Object
+  login({email, password}: any){
+    return signInWithEmailAndPassword(this.auth, email, password);
+  }
 
-  //   return parsedPayload.exp > Date.now() / 1000; // check if token is expired
-  // }
+  logout(){
+    localStorage.removeItem('token');
+    return signOut(this.auth);
+  }
 
-  logIn(credentials:any): Observable<any> {
-    return this.http.post(this.url, credentials).pipe(map(data => {
-      sessionStorage.setItem('currentUser', JSON.stringify(data));
-      return data;
-    }))
+  isLoggedIn() {
+    const token = localStorage.getItem('token'); // get token from local storage
+    if(token != null) {
+      const payload = window.atob(token.split('.')[1]); // decode payload of token
+      const parsedPayload = JSON.parse(payload); // convert payload into an Object
+      return parsedPayload.exp > Date.now() / 1000; // check if token is expired
+    }
+    else{
+      return false;
+    }
   }
 }

@@ -15,10 +15,10 @@ export class PortfolioService {
   constructor(private http:HttpClient) { }
 
   getData():Observable<any>{
-    //let data = this.http.get<any>(this.urlLocal + "/viewSections");
-    //console.log("PEDIDOOOOO");
-    //console.log(data);
-    //return (data);
-    return this.http.get('./assets/data/data.json');
+    let data = this.http.get<any>(this.urlLocal + "/viewSections");
+    console.log("PEDIDOOOOO");
+    console.log(data);
+    return (data);
+    //return this.http.get('./assets/data/data.json');
   }
 }

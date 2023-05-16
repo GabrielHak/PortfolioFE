@@ -30,8 +30,8 @@ export class PortfolioComponent implements OnInit {
 
   ngOnInit(){
     this.portfolioData.getData().subscribe(data => {
-      //this.sectionsInfo = data;
-      console.log(data);
+      this.sectionsInfo = data;
+      //console.log(data);
     });
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -11,15 +11,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
   form:FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private auth: AuthService, private router: Router){
-    this.form = formBuilder.group({
-      email:['',Validators.required, Validators.email],
-      password:['',Validators.required, Validators.minLength(8)],
-      deviceInfo:this.formBuilder.group({
-        deviceId: ["17867868768"],
-        deviceType: ["DEVICE_TYPEANDROID"],
-        notificationToken: ["67657575eececc34"]
-      })
+  constructor(private auth: AuthService, private router: Router, private route: ActivatedRoute) {
+    this.form = new FormGroup({
+      email: new FormControl(),
+      password: new FormControl(),
     });
   }
   ngOnInit(): void {
@@ -33,11 +28,16 @@ export class LoginComponent implements OnInit {
     return this.form.get('password');
   }
 
-  onSend(event: Event){
-    event.preventDefault();
-    this.auth.logIn(this.form.value).subscribe((data: any) => {
-      console.log("Data: " + JSON.stringify(data));
-      this.router.navigate(["/portfolio"]);
+  onSend(){
+    this.auth.login(this.form.value)
+    .then(async response => {
+      // const token = response.user.getIdTokenResult(false).then(response => console.log(response.token)).toString();
+      const token = response.user.getIdTokenResult(false).then(response =>{ return response.token}).catch(() => {return ""});
+      localStorage.setItem('token', await token);
+      this.router.navigate(['/portfolio']);
+    })
+    .catch(eror =>{
+      console.log(eror);
     });
   }
 }
