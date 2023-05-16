@@ -31,9 +31,9 @@ export class LoginComponent implements OnInit {
   onSend(){
     this.auth.login(this.form.value)
     .then(async response => {
-      // const token = response.user.getIdTokenResult(false).then(response => console.log(response.token)).toString();
-      const token = response.user.getIdTokenResult(false).then(response =>{ return response.token}).catch(() => {return ""});
-      localStorage.setItem('token', await token);
+      const token = (await response.user.getIdTokenResult(false)).token;
+      // const token = response.user.getIdTokenResult(false).then(response =>{ return response.token}).catch(() => {return ""});
+      localStorage.setItem('token', token);
       this.router.navigate(['/portfolio']);
     })
     .catch(eror =>{

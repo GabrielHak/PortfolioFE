@@ -11,14 +11,17 @@ import { Observable } from 'rxjs';
 })
 export class PortfolioService {
   url:string="https://portfolio-be-qrys.onrender.com";
-  urlLocal:string="https://localhost:8080";
+  urlLocal:string="http://localhost:8080";
+
   constructor(private http:HttpClient) { }
 
-  getData():Observable<any>{
-    let data = this.http.get<any>(this.urlLocal + "/viewSections");
-    console.log("PEDIDOOOOO");
-    console.log(data);
-    return (data);
-    //return this.http.get('./assets/data/data.json');
+  getSections():Observable<any>{
+    let sections = this.http.get<any>(this.url + "/viewSections");
+    return (sections);
+  }
+
+  getSubsection(key: string):Observable<any>{
+    let subsection = this.http.get<any>(this.url + "/searchSubsectionBySection/" + key);
+    return (subsection);
   }
 }

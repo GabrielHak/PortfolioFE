@@ -9,8 +9,14 @@ export class InterceptorService implements HttpInterceptor{
 
   constructor() { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    
-    
+    let currentData = localStorage.getItem('token');
+    if(currentData != null) {
+      req = req.clone({
+        setHeaders:{
+          Authorization: 'Bearer ' + currentData
+        }
+      });
+    }
     return next.handle(req);
   }
 }

@@ -8,30 +8,35 @@ import { PortfolioService } from 'src/app/services/portfolio.service';
 })
 export class PortfolioComponent implements OnInit {
 
-  sectionsInfo = [
-    {
-      "title": "",
-      "subtitle": "",
-      "paragraph": "",
-      "img": "",
-      "subsections": [
-        {
-          "title": "",
-          "subtitle": "",
-          "img": "",
-          "graph": "",
-        }
-      ]
-    }];
+  sectionsInfo = [{
+    "id": "",
+    "title": "",
+    "subtitle": "",
+    "paragraph": "",
+    "img": "",
+    "subsections": [
+      {
+        "title": "",
+        "subtitle": "",
+        "img": "",
+        "graph": "",
+      }
+    ]
+  }];
+  
     
   constructor(private portfolioData: PortfolioService){
 
   }
 
   ngOnInit(){
-    this.portfolioData.getData().subscribe(data => {
+    this.portfolioData.getSections().subscribe(data => {
       this.sectionsInfo = data;
-      //console.log(data);
+      this.sectionsInfo.forEach(section => {
+        this.portfolioData.getSubsection(section.title).subscribe(sub => {
+          section.subsections = sub;
+        })
+      });
     });
   }
 }

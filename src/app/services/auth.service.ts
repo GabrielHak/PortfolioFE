@@ -1,16 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
-// import { signOut } from 'firebase/auth';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor(private auth: Auth) { 
+  //currentUserSubject: BehaviorSubject<any>;
+  constructor(private auth: Auth, private http: HttpClient) {
+    //this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser') || '{}'));
   }
 
   login({email, password}: any){
-    return signInWithEmailAndPassword(this.auth, email, password);
+    let data = signInWithEmailAndPassword(this.auth, email, password);
+    //sessionStorage.setItem('currentUser', JSON.stringify(data));
+    return data;
   }
 
   logout(){
