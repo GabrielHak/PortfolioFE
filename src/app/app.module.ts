@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { ReactiveFormsModule } from '@angular/forms';
+//import { AngularFireModule } from '@angular/fire/compat';
+//import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+//import { environment } from 'src/environments/environment.development';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    //AngularFireModule.initializeApp(environment.firebaseConfig),
+    //AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

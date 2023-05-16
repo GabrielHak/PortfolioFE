@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   onSend(event: Event){
     event.preventDefault();
-    this.auth.logIn(this.form.value).subscribe(data => {
+    this.auth.logIn(this.form.value).subscribe((data: any) => {
       console.log("Data: " + JSON.stringify(data));
       this.router.navigate(["/portfolio"]);
     });
